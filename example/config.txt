@@ -1,0 +1,2 @@
+Prefix plugins/PhyloSeq2CSV/example
+Plugin PhyloSeq2CSV inputfile parameters.txt outputfile abund.csv

@@ -1,0 +1,3 @@
+abundance	asv.tab.csv
+taxonomy	asv.taxonomy.csv
+level	7
