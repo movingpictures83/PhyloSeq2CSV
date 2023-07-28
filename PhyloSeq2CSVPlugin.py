@@ -9,6 +9,9 @@ class PhyloSeq2CSVPlugin:
        self.abundancefile = open(PyPluMA.prefix()+"/"+self.parameters["abundance"], 'r')
        self.taxonomyfile = open(PyPluMA.prefix()+"/"+self.parameters["taxonomy"], 'r')
        self.level = int(self.parameters["level"])
+       self.concatenate = True
+       if ('concatenate' in self.parameters and self.parameters['concatenate'] == "False"):
+           self.concatenate = False
 
     def run(self):
         # Build updated taxonomy.  Assumption is that the first column is the
@@ -32,7 +35,10 @@ class PhyloSeq2CSVPlugin:
             if (i-1 != self.level):
                myclass = TAX[i-1] + " " + myclass
             elif (self.level == 7):
+               if (self.concatenate):
                 myclass = contents[6][:len(contents[6])-1] + "_" + contents[7][1:]
+               else:
+                myclass = '\"' + contents[7][1:]
             self.classifications[myname] = myclass
         # Build updated abundance table.  Assumption is that the first
         # column is the name, followed by abundances in each sample.
